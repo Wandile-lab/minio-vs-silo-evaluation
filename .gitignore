@@ -1,0 +1,17 @@
+# Environment & secrets
+.env
+*.env
+*.pem
+*.key
+
+# Data & local volumes
+data/
+*.raw
+*.bin
+benchmarks/results/raw/
+
+# OS and Editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
