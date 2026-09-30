@@ -1,0 +1,20 @@
+==================================================
+ MANIFEST INTEGRITY & TAMPER DETECTION REPORT
+==================================================
+Baseline: docs/02-test-data-and-verification/evidence/standard-baseline-manifest.tsv
+Target:   /tmp/tampered-manifest.tsv
+--------------------------------------------------
+[FAIL] Discrepancies detected across manifests:
+--- docs/02-test-data-and-verification/evidence/standard-baseline-manifest.tsv	2026-09-30 19:08:34.535408700 +0200
++++ /tmp/tampered-manifest.tsv	2026-09-30 19:09:12.187040500 +0200
+@@ -1,5 +1,4 @@
+ KEY	VERSION_ID	SIZE	ETAG	METADATA
+-minio_single/standard-data-bucket/deep/year=2026/month=09/dept=eng/small_1.bin	null	4096		{}
+ minio_single/standard-data-bucket/deep/year=2026/month=09/dept=eng/small_10.bin	null	4096		{}
+ minio_single/standard-data-bucket/deep/year=2026/month=09/dept=eng/small_11.bin	null	4096		{}
+ minio_single/standard-data-bucket/deep/year=2026/month=09/dept=eng/small_12.bin	null	4096		{}
+@@ -31,3 +30,4 @@
+ minio_single/standard-data-bucket/flat/small_9.bin	null	4096		{}
+ minio_single/standard-data-bucket/large/large_500m.bin	null	524288000		{}
+ minio_single/standard-data-bucket/versioned/document.bin	null	10485760		{}
++tampered-file.bin	00000000-0000-0000-0000-000000000000	1024	deadbeefbadchecksum	{}

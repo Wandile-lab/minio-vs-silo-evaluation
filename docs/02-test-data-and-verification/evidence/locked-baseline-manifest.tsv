@@ -1,0 +1,3 @@
+KEY	VERSION_ID	SIZE	ETAG	METADATA
+minio_single/locked-dataset-bucket/compliance-record.txt	null	24		{}
+minio_single/locked-dataset-bucket/governance-record.txt	null	24		{}
