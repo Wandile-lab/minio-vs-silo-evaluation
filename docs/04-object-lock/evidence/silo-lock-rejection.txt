@@ -1,0 +1,13 @@
+=== Silo Baseline: Compliance Object Lock Deletion Rejection ===
+Bucket: locked-bucket
+Object: records.txt
+VersionID: 5d9fbe6b-0412-4e9e-99a1-1e0113ce4844
+Lock Mode: COMPLIANCE
+Retain Until: 2026-10-01T14:33:47.000Z
+
+Attempted Deletion Command:
+mcli rm --force --version-id 5d9fbe6b-0412-4e9e-99a1-1e0113ce4844 silo_local/locked-bucket/records.txt
+
+Actual Engine Response:
+mcli: <ERROR> Failed to remove `silo_local/locked-bucket/records.txt`. Object, 'records.txt (Version ID=5d9fbe6b-0412-4e9e-99a1-1e0113ce4844)' is WORM protected and cannot be overwritten
+Status: PASS (Enforced)

@@ -1,0 +1,13 @@
+=== MinIO Baseline: Compliance Object Lock Deletion Rejection ===
+Bucket: locked-bucket
+Object: records.txt
+VersionID: f163b382-5bfa-413d-beeb-ca03bc3de081
+Lock Mode: COMPLIANCE
+Retain Until: 2026-10-01T14:30:00.000Z
+
+Attempted Deletion Command:
+mcli rm --force --version-id f163b382-5bfa-413d-beeb-ca03bc3de081 minio_local/locked-bucket/records.txt
+
+Actual Engine Response:
+mcli: <ERROR> Failed to remove `minio_local/locked-bucket/records.txt`. Object, 'records.txt (Version ID=f163b382-5bfa-413d-beeb-ca03bc3de081)' is WORM protected and cannot be overwritten
+Status: PASS (Enforced)
