@@ -1,0 +1,83 @@
+services:
+  minio-node1:
+    image: docker.io/pgsty/minio:RELEASE.2026-08-04T00-00-00Z
+    container_name: minio-node1
+    hostname: minio-node1
+    command: server http://minio-node{1...4}/data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ../data/minio/node1:/data
+    networks:
+      - migration-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    restart: unless-stopped
+
+  minio-node2:
+    image: docker.io/pgsty/minio:RELEASE.2026-08-04T00-00-00Z
+    container_name: minio-node2
+    hostname: minio-node2
+    command: server http://minio-node{1...4}/data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ../data/minio/node2:/data
+    networks:
+      - migration-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    restart: unless-stopped
+
+  minio-node3:
+    image: docker.io/pgsty/minio:RELEASE.2026-08-04T00-00-00Z
+    container_name: minio-node3
+    hostname: minio-node3
+    command: server http://minio-node{1...4}/data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ../data/minio/node3:/data
+    networks:
+      - migration-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    restart: unless-stopped
+
+  minio-node4:
+    image: docker.io/pgsty/minio:RELEASE.2026-08-04T00-00-00Z
+    container_name: minio-node4
+    hostname: minio-node4
+    command: server http://minio-node{1...4}/data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ../data/minio/node4:/data
+    networks:
+      - migration-net
+    ports:
+      # Bound strictly to 127.0.0.1 for Web Console access per Section 3
+      - "127.0.0.1:9001:9001"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    restart: unless-stopped
+
+networks:
+  migration-net:
+    external: true
