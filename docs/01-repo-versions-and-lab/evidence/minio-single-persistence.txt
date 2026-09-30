@@ -1,0 +1,19 @@
+=== DEV-905 Acceptance: Local Bind-Mount Persistence Across Stack Down/Up ===
+Timestamp: 2026-09-30
+Target: minio-single (data/minio-single)
+
+Action:
+1. Created bucket: minio_single/persistence-test
+2. Ingested payload: "DEV-905 Persistence Verification Payload" -> minio_single/persistence-test/persist.txt
+3. Executed: ./scripts/lab-down.sh (docker compose down without -v)
+4. Executed: ./scripts/lab-up.sh (docker compose up -d)
+5. Read back payload:
+   docker run --rm --net migration-net \
+     -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+     --entrypoint mcli docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
+     --insecure cat minio_single/persistence-test/persist.txt
+
+Actual Read Output:
+DEV-905 Persistence Verification Payload
+
+Status: PASS (Zero data loss across container lifecycle restart)

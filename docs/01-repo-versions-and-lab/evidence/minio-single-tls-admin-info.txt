@@ -1,0 +1,23 @@
+=== DEV-905 Acceptance: MinIO Single-Node HTTPS Admin Info ===
+Timestamp: 2026-09-30
+Endpoint: https://minio-single:9000
+
+Command:
+docker run --rm --net migration-net \
+  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+  --entrypoint mcli docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
+  --insecure admin info minio_single
+
+Output:
+●  minio-single:9000
+   Uptime: 47 seconds
+   Version: 2026-08-04T00:00:00Z
+   Network: 1/1 OK
+   Drives: 1/1 OK
+   Pool: 1
+
+┌──────┬────────────────────────┬─────────────────────┬──────────────┐
+│ Pool │ Drives Usage           │ Erasure stripe size │ Erasure sets │
+│ 1st  │ 56.4% (total: 297 GiB) │ 1                   │ 1            │
+└──────┴────────────────────────┴─────────────────────┴──────────────┘
+Status: PASS (TLS Termination and HTTPS S3 Admin API Verified)

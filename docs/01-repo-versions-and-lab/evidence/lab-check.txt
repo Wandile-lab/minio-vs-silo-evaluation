@@ -1,0 +1,20 @@
+==========================================
+ LAB ENVIRONMENT & PROFILE SPEC CHECK
+==========================================
+Timestamp: Wed Sep 30 15:37:34 UTC 2026
+OS / Kernel: MINGW64_NT-10.0-26200 3.6.10-710e5275.x86_64 x86_64 Msys
+--- CPU Info ---
+Logical Cores: 4
+--- Memory Info ---
+MemTotal:        8238428 kB
+--- Storage / SSD Info ---
+Filesystem      Size  Used Avail Use% Mounted on
+C:              298G  168G  130G  57% /c
+--- Docker Environment ---
+Docker version 29.8.0, build 88096ef
+Docker Compose version v5.5.1
+--- Network Check ---
+Network 'migration-net': ACTIVE
+==========================================
+Profile Target: Profile B (Fallback, <=16GB RAM, Local SSD mount)
+==========================================
