@@ -1,0 +1,83 @@
+services:
+  silo-node1:
+    image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    container_name: silo-node1
+    hostname: silo-node1
+    command: server http://silo-node{1...4}/data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ../data/silo/node1:/data
+    networks:
+      - migration-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    restart: unless-stopped
+
+  silo-node2:
+    image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    container_name: silo-node2
+    hostname: silo-node2
+    command: server http://silo-node{1...4}/data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ../data/silo/node2:/data
+    networks:
+      - migration-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    restart: unless-stopped
+
+  silo-node3:
+    image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    container_name: silo-node3
+    hostname: silo-node3
+    command: server http://silo-node{1...4}/data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ../data/silo/node3:/data
+    networks:
+      - migration-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    restart: unless-stopped
+
+  silo-node4:
+    image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    container_name: silo-node4
+    hostname: silo-node4
+    command: server http://silo-node{1...4}/data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ../data/silo/node4:/data
+    networks:
+      - migration-net
+    ports:
+      # Bound to 9002 on host so it does not collide with MinIO console (9001)
+      - "127.0.0.1:9002:9001"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    restart: unless-stopped
+
+networks:
+  migration-net:
+    external: true
