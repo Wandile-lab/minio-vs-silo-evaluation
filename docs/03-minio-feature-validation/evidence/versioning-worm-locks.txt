@@ -1,0 +1,38 @@
+==================================================
+ DEV-907: Versioning Edge Cases & WORM Lock Tests
+==================================================
+[+] Ensuring locked bucket and records exist...
+`/tmp/c.txt` -> `minio_single/locked-dataset-bucket/compliance-record.txt`
+┌───────┬─────────────┬──────────┬─────────┐
+│ Total │ Transferred │ Duration │ Speed   │
+│ 29 B  │ 29 B        │ 00m00s   │ 247 B/s │
+└───────┴─────────────┴──────────┴─────────┘
+Object retention successfully set for `minio_single/locked-dataset-bucket/compliance-record.txt`.
+`/tmp/g.txt` -> `minio_single/locked-dataset-bucket/governance-record.txt`
+┌───────┬─────────────┬──────────┬─────────┐
+│ Total │ Transferred │ Duration │ Speed   │
+│ 30 B  │ 30 B        │ 00m00s   │ 343 B/s │
+└───────┴─────────────┴──────────┴─────────┘
+Object retention successfully set for `minio_single/locked-dataset-bucket/governance-record.txt`.
+Object legal hold successfully set for `governance-record.txt`.
+[+] Extracting version IDs for locked objects...
+  -> Extracted Compliance Version ID: 9242205e-f280-4bef-97de-4622bb85003b
+  -> Extracted Governance Version ID:   8574bc4b-b325-4a1a-826d-13eaf1c3932b
+[+] Testing permanent version deletion on COMPLIANCE record (Expected: BLOCKED)...
+mcli: <ERROR> Failed to remove `minio_single/locked-dataset-bucket/compliance-record.txt`. Object, 'compliance-record.txt (Version ID=9242205e-f280-4bef-97de-4622bb85003b)' is WORM protected and cannot be overwritten
+mcli: <ERROR> Failed to remove `minio_single/locked-dataset-bucket/compliance-record.txt`. Object, 'compliance-record.txt (Version ID=9242205e-f280-4bef-97de-4622bb85003b)' is WORM protected and cannot be overwritten
+[PASS] WORM compliance locked version cannot be purged.
+[+] Testing permanent version deletion on GOVERNANCE record with Legal Hold (Expected: BLOCKED)...
+mcli: <ERROR> Failed to remove `minio_single/locked-dataset-bucket/governance-record.txt`. Object, 'governance-record.txt (Version ID=8574bc4b-b325-4a1a-826d-13eaf1c3932b)' is WORM protected and cannot be overwritten
+mcli: <ERROR> Failed to remove `minio_single/locked-dataset-bucket/governance-record.txt`. Object, 'governance-record.txt (Version ID=8574bc4b-b325-4a1a-826d-13eaf1c3932b)' is WORM protected and cannot be overwritten
+[PASS] Legal hold prevents permanent version purge even under root administrator.
+[+] Testing Versioning State Changes & Delete Marker Mechanics...
+minio_single/vers-edge-test versioning is enabled
+10 bytes -> `minio_single/vers-edge-test/file.txt`
+10 bytes -> `minio_single/vers-edge-test/file.txt`
+Created delete marker `minio_single/vers-edge-test/file.txt` (versionId=580eaa74-8476-48d7-a82e-131f098be3f0).
+[+] Object hidden by delete marker as expected.
+minio_single/vers-edge-test versioning is suspended
+22 bytes -> `minio_single/vers-edge-test/file.txt`
+minio_single/vers-edge-test versioning is enabled
+[PASS] Versioning lifecycle, suspension, and delete marker mechanics verified.

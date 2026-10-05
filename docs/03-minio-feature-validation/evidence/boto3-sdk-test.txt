@@ -1,0 +1,6 @@
+[+] Object uploaded with custom metadata and tags.
+[+] Metadata: {'client': 'boto3', 'tested-by': 'intern'}
+[+] Tags: [{'Key': 'env', 'Value': 'dev'}, {'Key': 'suite', 'Value': 'validation'}]
+[+] Presigned URL generated: https://minio-single:9000/s3-core-test/boto3-sample.txt?AWSAccessKeyId=glynacadmin&Signature=tIodYzuuYb%2Fv9dR%2BPmVDzBHcfYI%3D&Expires=1791211161
+[+] Presigned Fetch Body: Hello from boto3 SDK validation!
+[PASS] boto3 S3 API, Metadata, Tagging, and Presigned URLs verified.

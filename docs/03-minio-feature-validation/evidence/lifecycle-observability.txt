@@ -1,0 +1,23 @@
+==================================================
+ DEV-907: Lifecycle Expiry & Observability Checks
+==================================================
+minio_single/vers-edge-test versioning is enabled
+[+] Applying Bucket Lifecycle configuration...
+Lifecycle configuration rule added with ID `db1sgusnklhs72q49c30` to minio_single/vers-edge-test.
+┌───────────────────────────────────────────────────────────────────────────────────────┐
+│ Expiration for latest version (Expiration)                                            │
+├──────────────────────┬─────────┬────────┬──────┬────────────────┬─────────────────────┤
+│ ID                   │ STATUS  │ PREFIX │ TAGS │ DAYS TO EXPIRE │ EXPIRE DELETEMARKER │
+├──────────────────────┼─────────┼────────┼──────┼────────────────┼─────────────────────┤
+│ db1rkosheeoc72qsqd2g │ Enabled │ -      │ -    │              0 │ true                │
+│ db1sgusnklhs72q49c30 │ Enabled │ -      │ -    │              0 │ true                │
+└──────────────────────┴─────────┴────────┴──────┴────────────────┴─────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ Expiration for older versions (NoncurrentVersionExpiration)                     │
+├──────────────────────┬─────────┬────────┬──────┬────────────────┬───────────────┤
+│ ID                   │ STATUS  │ PREFIX │ TAGS │ DAYS TO EXPIRE │ KEEP VERSIONS │
+├──────────────────────┼─────────┼────────┼──────┼────────────────┼───────────────┤
+│ db1rkosheeoc72qsqd2g │ Enabled │ -      │ -    │              1 │             0 │
+│ db1sgusnklhs72q49c30 │ Enabled │ -      │ -    │              1 │             0 │
+└──────────────────────┴─────────┴────────┴──────┴────────────────┴───────────────┘
+[+] Validating Prometheus metrics endpoint (/minio/v2/metrics/cluster)...

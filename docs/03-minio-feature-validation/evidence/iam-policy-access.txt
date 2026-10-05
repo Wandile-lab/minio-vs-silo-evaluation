@@ -1,0 +1,23 @@
+==================================================
+ DEV-907: IAM, Access Control & Policy Validation
+==================================================
+[+] Creating restricted user 'readonlyuser'...
+Added user `readonlyuser` successfully.
+Attached Policies: [readonly]
+To User: readonlyuser
+[+] Provisioning Service Account for readonlyuser...
+[+] Service Account Generated: AccessKey=3AKFE9KSBVAVTQHH1GPF
+[+] Verifying Read Access (Expected: SUCCESS)...
+0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+[PASS] Read-only service account successfully fetched object payload.
+[+] Verifying Unauthorized Write (Expected: ACCESS DENIED / INSUFFICIENT PERMISSIONS)...
+mcli: <ERROR> Unable to write to one or more targets. Insufficient permissions to access this path `https://minio-single:9000/s3-core-test/forbidden.txt`.
+mcli: <ERROR> Unable to write to one or more targets. Insufficient permissions to access this path `https://minio-single:9000/s3-core-test/forbidden.txt`.
+[PASS] Access control boundary strictly enforced: Write rejected with authorization error.
+[+] Testing Anonymous Public Access Policy on /public prefix...
+Access permission for `minio_single/s3-core-test/public` is set to `download`
+20 bytes -> `minio_single/s3-core-test/public/hello.txt`
+public open content
+
+[PASS] Anonymous public policy retrieval verified.

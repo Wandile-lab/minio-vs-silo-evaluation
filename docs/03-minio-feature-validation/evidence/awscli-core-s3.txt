@@ -1,0 +1,21 @@
+Completed 37 Bytes/37 Bytes (271 Bytes/s) with 1 file(s) remainingupload: ../tmp/payload.txt to s3://s3-core-test/range.txt         
+--- Range Read (bytes=0-9) ---
+{
+    "AcceptRanges": "bytes",
+    "LastModified": "2026-10-05T14:22:27+00:00",
+    "ContentLength": 10,
+    "ETag": "\"7f3c6345eb1c1123cb5bc3670975acd9\"",
+    "ContentRange": "bytes 0-9/37",
+    "ContentType": "text/plain",
+    "Metadata": {}
+}
+0123456789
+--- Head Object ---
+{
+    "AcceptRanges": "bytes",
+    "LastModified": "2026-10-05T14:22:27+00:00",
+    "ContentLength": 37,
+    "ETag": "\"7f3c6345eb1c1123cb5bc3670975acd9\"",
+    "ContentType": "text/plain",
+    "Metadata": {}
+}
