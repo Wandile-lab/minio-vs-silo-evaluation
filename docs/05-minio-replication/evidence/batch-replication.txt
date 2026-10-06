@@ -1,0 +1,40 @@
+==================================================
+ DEV-909: Batch Replication Jobs (mc batch)
+==================================================
+[+] Generating sample batch replication YAML...
+replicate:
+  apiVersion: v1
+  # source of the objects to be replicated
+  source:
+    type: TYPE # valid values are "s3" or "minio"
+    bucket: BUCKET
+    prefix: PREFIX # 'PREFIX' is optional
+    # If your source is the 'local' alias specified to 'mc batch start', then the 'endpoint' and 'credentials' fields are optional and can be omitted
+    # Either the 'source' or 'remote' *must* be the "local" deployment
+    endpoint: "http[s]://HOSTNAME:PORT"
+    # path: "on|off|auto" # "on" enables path-style bucket lookup. "off" enables virtual host (DNS)-style bucket lookup. Defaults to "auto"
+    credentials:
+      accessKey: ACCESS-KEY # Required
+      secretKey: SECRET-KEY # Required
+    # sessionToken: SESSION-TOKEN # Optional only available when rotating credentials are used
+    snowball: # automatically activated if the source is local
+      disable: false # optionally turn-off snowball archive transfer
+      batch: 100 # upto this many objects per archive
+      inmemory: true # indicates if the archive must be staged locally or in-memory
+      compress: false # S2/Snappy compressed archive
+      smallerThan: 256KiB # create archive for all objects smaller than 256KiB
+      skipErrs: false # skips any source side read() errors
+
+  # target where the objects must be replicated
+  target:
+
+[+] Creating targeted batch job definition...
+28 bytes -> `source/rep-source-bucket/batch/sample-batch.txt`
+[+] Submitting batch replication job...
+[+] Submitted Batch Job ID: 
+[+] Checking batch job status...
+currently no jobs are running
+[+] Checking if batch object reached target:
+[2026-10-06 16:29:12 UTC]    28B STANDARD sample-batch.txt
+
+[PASS] Batch replication workflow validated.

@@ -1,0 +1,15 @@
+[+] Applying reverse replication rule: target -> source...
+Replication configuration rule applied to target/rep-target-bucket successfully.
+[+] Rules on target:
+Rules:
+Remote Bucket: minio-single:9000/rep-source-bucket
+  Rule ID: db2i1qhroo4s75gba9b0
+  Priority: 0
+  ARN: arn:minio:replication::306239a5-89fb-4e99-b3ec-38c96d3e83fa:rep-source-bucket
+
+[+] Testing write originating on TARGET...
+46 bytes -> `target/rep-target-bucket/origin-target.txt`
+[+] Waiting 6 seconds for reverse replication...
+
+=== Verifying origin-target.txt arrived on SOURCE ===
+payload written directly to target deployment

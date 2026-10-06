@@ -1,0 +1,31 @@
+Added `source` successfully.
+Added `target` successfully.
+=== Source Status ===
+●  minio-single:9000
+   Uptime: 30 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 1/1 OK 
+   Drives: 1/1 OK 
+   Pool: 1
+
+┌──────┬────────────────────────┬─────────────────────┬──────────────┐
+│ Pool │ Drives Usage           │ Erasure stripe size │ Erasure sets │
+│ 1st  │ 56.8% (total: 297 GiB) │ 1                   │ 1            │
+└──────┴────────────────────────┴─────────────────────┴──────────────┘
+
+530 MiB Used, 5 Buckets, 40 Objects, 51 Versions, 4 Delete Markers
+1 drive online, 0 drives offline, EC:0
+=== Target Status ===
+●  minio-target:9000
+   Uptime: 30 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 1/1 OK 
+   Drives: 1/1 OK 
+   Pool: 1
+
+┌──────┬────────────────────────┬─────────────────────┬──────────────┐
+│ Pool │ Drives Usage           │ Erasure stripe size │ Erasure sets │
+│ 1st  │ 56.8% (total: 297 GiB) │ 1                   │ 1            │
+└──────┴────────────────────────┴─────────────────────┴──────────────┘
+
+1 drive online, 0 drives offline, EC:0

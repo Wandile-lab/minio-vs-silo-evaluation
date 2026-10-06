@@ -1,0 +1,39 @@
+[+] Writing live version 1 with tags...
+18 bytes -> `source/rep-source-bucket/app-config.txt`
+[+] Writing live version 2 (overwrite to create second version)...
+26 bytes -> `source/rep-source-bucket/app-config.txt`
+[+] Writing temporary object then deleting to create delete marker...
+15 bytes -> `source/rep-source-bucket/temp-file.txt`
+Created delete marker `source/rep-source-bucket/temp-file.txt` (versionId=d335ac77-e741-496f-997b-d8df69e9ec75).
+[+] Waiting 8 seconds for replication queue to flush...
+
+=== Target Object Inventory (Versions & Delete Markers) ===
+[2026-10-06 16:22:28 UTC]    26B STANDARD 9899f957-86fe-42c0-b30e-fe1b47e4adec v2 PUT app-config.txt
+[2026-10-06 16:22:28 UTC]    18B STANDARD a200fa10-2290-4ce3-b576-9c329581c502 v1 PUT app-config.txt
+[2026-10-06 16:22:29 UTC]     0B STANDARD d335ac77-e741-496f-997b-d8df69e9ec75 v2 DEL temp-file.txt
+[2026-10-06 16:22:29 UTC]    15B STANDARD 3b9c28e3-494c-4fd3-823e-5c9a258948ec v1 PUT temp-file.txt
+
+=== Verifying Tags on Target ===
+Name : https://minio-target:9000/rep-target-bucket/app-config.txt
+env  : production
+tier : backend
+
+=== Verifying Pre-Existing Object Content on Target ===
+[+] Initiating replication resync on source/rep-source-bucket...
+[+] Waiting 5 seconds for resync worker...
+[+] Checking resync status:
+No replication resync status available.
+
+[+] Verifying pre-existing object on target now:
+[+] Triggering resync with explicit remote-bucket target...
+Replication reset started for source/rep-source-bucket with ID 49306b55-0b8c-4435-aca2-5e494f700137
+[+] Checking resync status:
+Resync status summary:
+● arn:minio:replication::36c1e73b-bcb0-4c9f-a191-0be1c289f1b7:rep-target-bucket                                         
+   Status: Completed
+   Replication Status | Size (Bytes)    | Count          
+   Replicated         | 145 B           | 6              
+   Failed             | 0 B             | 0              
+
+[+] Checking if pre-existing.txt arrived on target:
+historical data before replication rule

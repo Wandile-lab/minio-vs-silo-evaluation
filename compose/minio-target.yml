@@ -1,0 +1,29 @@
+services:
+  minio-target:
+    image: docker.io/pgsty/minio:RELEASE.2026-08-04T00-00-00Z
+    container_name: minio-target
+    hostname: minio-target
+    command: server --certs-dir /root/.minio/certs --address :9000 --console-address :9001 /data
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-glynacadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-glynacinternpass2026}
+      MINIO_PROMETHEUS_AUTH_TYPE: "public"
+    volumes:
+      - ../data/minio-target:/data
+      - ../certs/public.crt:/root/.minio/certs/public.crt:ro
+      - ../certs/private.key:/root/.minio/certs/private.key:ro
+      - ../certs/public.crt:/root/.minio/certs/CAs/public.crt:ro
+    ports:
+      - "127.0.0.1:9002:9000"
+      - "127.0.0.1:9003:9001"
+    networks:
+      - migration-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -k -f https://localhost:9000/minio/health/live || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+networks:
+  migration-net:
+    external: true

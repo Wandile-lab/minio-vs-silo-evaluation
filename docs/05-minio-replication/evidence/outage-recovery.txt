@@ -1,0 +1,29 @@
+==================================================
+ DEV-909: Replication Outage & Recovery Test
+==================================================
+[+] Simulating target site outage (stopping minio-target)...
+[+] Writing 10 payload objects to source during outage...
+23 bytes -> `source/rep-source-bucket/outage-load-1.txt`
+23 bytes -> `source/rep-source-bucket/outage-load-2.txt`
+23 bytes -> `source/rep-source-bucket/outage-load-3.txt`
+23 bytes -> `source/rep-source-bucket/outage-load-4.txt`
+23 bytes -> `source/rep-source-bucket/outage-load-5.txt`
+23 bytes -> `source/rep-source-bucket/outage-load-6.txt`
+23 bytes -> `source/rep-source-bucket/outage-load-7.txt`
+23 bytes -> `source/rep-source-bucket/outage-load-8.txt`
+23 bytes -> `source/rep-source-bucket/outage-load-9.txt`
+24 bytes -> `source/rep-source-bucket/outage-load-10.txt`
+[+] Checking source replication status / backlog while target is dead:
+  Replication status since 16 minutes                                                         
+  minio-target:9000                                                                           
+  Replicated:                   5 objects (139 B)                                             
+  Queued:                       ● 0 objects, 0 B (avg: 0 objects, 0 B ; max: 0 objects, 0 B)  
+  Workers:                      0 (avg: 0; max: 0)                                            
+  Transfer Rate:                0 B/s (avg: 18 B/s; max: 55 B/s                               
+  Latency:                      257ms (avg: 10ms; max: 3.074s)                                
+  Link:                         ● offline 15 seconds (total downtime: 15 seconds)             
+  Errors:                       10 in last 1 minute; 10 in last 1hr; 10 since uptime          
+[+] Recovering target site (starting minio-target)...
+[+] Waiting for replication backlog to drain and achieve consistency...
+
+[PASS] Replication failure recovery and backlog flush verified.
