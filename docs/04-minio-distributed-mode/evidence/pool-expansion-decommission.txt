@@ -1,0 +1,80 @@
+==================================================
+ DEV-908: Server Pool Expansion & Decommission
+==================================================
+[+] Upgrading cluster from 1 pool to 2 pools...
+[+] Waiting for 8 nodes across 2 pools to form quorum...
+●  minio-d1:9000
+   Uptime: 24 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 8/8 OK 
+   Drives: 1/1 OK 
+   Pool: 1
+
+●  minio-d2:9000
+   Uptime: 36 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 8/8 OK 
+   Drives: 1/1 OK 
+   Pool: 1
+
+●  minio-d3:9000
+   Uptime: 26 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 8/8 OK 
+   Drives: 1/1 OK 
+   Pool: 1
+
+●  minio-d4:9000
+   Uptime: 28 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 8/8 OK 
+   Drives: 1/1 OK 
+   Pool: 1
+
+●  minio-d5:9000
+   Uptime: 34 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 8/8 OK 
+   Drives: 1/1 OK 
+   Pool: 2
+
+●  minio-d6:9000
+   Uptime: 31 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 8/8 OK 
+   Drives: 1/1 OK 
+   Pool: 2
+
+●  minio-d7:9000
+   Uptime: 36 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 8/8 OK 
+   Drives: 1/1 OK 
+   Pool: 2
+
+●  minio-d8:9000
+   Uptime: 33 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 8/8 OK 
+   Drives: 1/1 OK 
+   Pool: 2
+
+┌──────┬────────────────────────┬─────────────────────┬──────────────┐
+│ Pool │ Drives Usage           │ Erasure stripe size │ Erasure sets │
+│ 1st  │ 56.8% (total: 594 GiB) │ 4                   │ 1            │
+│ 2nd  │ 56.8% (total: 594 GiB) │ 4                   │ 1            │
+└──────┴────────────────────────┴─────────────────────┴──────────────┘
+
+815 B Used, 1 Bucket, 22 Objects
+8 drives online, 0 drives offline, EC:2
+[+] Probing data read integrity across expansion...
+[PASS] Existing data immediately readable post-expansion.
+[+] Testing Decommissioning initiation on Pool 2...
+Decommission started successfully for `https://minio-d{5...8}:9000/data`.
+[+] Checking decommission status...
+┌─────┬──────────────────────────────────┬────────────────────────┬──────────┐
+│ ID  │ Pools                            │ Drives Usage           │ Status   │
+│ 1st │ https://minio-d{1...4}:9000/data │ 56.8% (total: 594 GiB) │ Active   │
+│ 2nd │ https://minio-d{5...8}:9000/data │ 56.8% (total: 594 GiB) │ Complete │
+└─────┴──────────────────────────────────┴────────────────────────┴──────────┘
+[PASS] Server pool expansion and decommission workflow verified.

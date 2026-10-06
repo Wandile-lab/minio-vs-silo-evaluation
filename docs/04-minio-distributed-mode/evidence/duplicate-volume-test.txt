@@ -1,0 +1,14 @@
+==================================================
+ DEV-908: Duplicate Drive Volume Protection Test
+==================================================
+[+] Checking drive format metadata in data/minio-dist/d1/.minio.sys/format.json...
+Format version: 1
+Format Type: xl
+Disk Set Index: None
+Disk Index in Set: None
+Disk UUID: d72b57da-f922-4ef7-9537-f498b3826e12
+
+[+] Proving prevention: Launching container attempting to claim d1 volume concurrently...
+FATAL Unable to prepare the list of endpoints: all args must have ellipses for pool expansion (Invalid arguments specified) args: [https://minio-rogue:9000/data https://minio-d{2...4}:9000/data]
+
+[PASS] Drive volume duplicate mounting prevention demonstrated.

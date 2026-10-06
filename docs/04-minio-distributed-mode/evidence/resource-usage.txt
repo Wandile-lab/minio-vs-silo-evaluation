@@ -1,0 +1,5 @@
+NAME       CPU %     MEM USAGE / LIMIT     MEM %
+minio-d1   7.49%     83.96MiB / 3.755GiB   2.18%
+minio-d2   0.09%     84.48MiB / 3.755GiB   2.20%
+minio-d3   0.00%     71.95MiB / 3.755GiB   1.87%
+minio-d4   0.12%     83.38MiB / 3.755GiB   2.17%

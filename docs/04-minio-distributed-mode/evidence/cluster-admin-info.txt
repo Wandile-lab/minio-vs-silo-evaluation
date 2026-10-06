@@ -1,0 +1,34 @@
+●  minio-d1:9000
+   Uptime: 36 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 4/4 OK 
+   Drives: 1/1 OK 
+   Pool: 1
+
+●  minio-d2:9000
+   Uptime: 39 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 4/4 OK 
+   Drives: 1/1 OK 
+   Pool: 1
+
+●  minio-d3:9000
+   Uptime: 37 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 4/4 OK 
+   Drives: 1/1 OK 
+   Pool: 1
+
+●  minio-d4:9000
+   Uptime: 34 seconds 
+   Version: 2026-08-04T00:00:00Z
+   Network: 4/4 OK 
+   Drives: 1/1 OK 
+   Pool: 1
+
+┌──────┬────────────────────────┬─────────────────────┬──────────────┐
+│ Pool │ Drives Usage           │ Erasure stripe size │ Erasure sets │
+│ 1st  │ 56.8% (total: 594 GiB) │ 4                   │ 1            │
+└──────┴────────────────────────┴─────────────────────┴──────────────┘
+
+4 drives online, 0 drives offline, EC:2
