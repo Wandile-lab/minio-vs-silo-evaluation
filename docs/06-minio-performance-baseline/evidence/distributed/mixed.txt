@@ -1,0 +1,33 @@
+
+Skipping DELETE too few samples. Longer benchmark run required for reliable results.
+
+
+──────────────────────────────────
+
+Report: GET. Concurrency: 3. Ran: 17s
+ * Average: 1.61 MiB/s, 0.16 obj/s
+ * Reqs: Avg: 11919.3ms, 50%: 15956.7ms, 90%: 15956.7ms, 99%: 15956.7ms, Fastest: 8812.2ms, Slowest: 15956.7ms, StdDev: 3662.0ms
+ * TTFB: Avg: 3.602s, Best: 2.859s, 25th: 2.961s, Median: 4.987s, 75th: 4.987s, 90th: 4.987s, 99th: 4.987s, Worst: 4.987s StdDev: 1.2s
+
+Throughput, split into 17 x 1s:
+ * Fastest: 2.7MiB/s, 0.27 obj/s
+ * 50% Median: 1573.6KiB/s, 0.15 obj/s
+ * Slowest: 641.7KiB/s, 0.06 obj/s
+
+──────────────────────────────────
+
+Report: PUT. Concurrency: 3. Ran: 14s
+ * Average: 2.51 MiB/s, 0.25 obj/s
+ * Reqs: Avg: 5764.7ms, 50%: 6143.6ms, 90%: 6443.7ms, 99%: 6443.7ms, Fastest: 5067.5ms, Slowest: 7667.9ms, StdDev: 536.6ms
+
+Throughput, split into 14 x 1s:
+ * Fastest: 3.4MiB/s, 0.34 obj/s
+ * 50% Median: 2020.7KiB/s, 0.20 obj/s
+ * Slowest: 1885.1KiB/s, 0.18 obj/s
+
+──────────────────────────────────
+
+Skipping STAT too few samples. Longer benchmark run required for reliable results.
+
+
+

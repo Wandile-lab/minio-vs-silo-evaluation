@@ -1,0 +1,11 @@
+
+Report: PUT. Concurrency: 2. Ran: 15s
+ * Average: 4.63 MiB/s, 0.58 obj/s
+ * Reqs: Avg: 3437.5ms, 50%: 3639.2ms, 90%: 4073.7ms, 99%: 4073.7ms, Fastest: 2325.2ms, Slowest: 4408.5ms, StdDev: 620.9ms
+
+Throughput, split into 15 x 1s:
+ * Fastest: 6.7MiB/s, 0.84 obj/s
+ * 50% Median: 4.4MiB/s, 0.55 obj/s
+ * Slowest: 3.6MiB/s, 0.45 obj/s
+
+

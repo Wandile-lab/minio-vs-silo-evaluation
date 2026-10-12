@@ -1,0 +1,11 @@
+
+Report: DELETE. Concurrency: 4. Ran: 1m6s
+ * Average: 5.76 obj/s
+ * Reqs: Avg: 69456.8ms, 50%: 69535.6ms, 90%: 69598.7ms, 99%: 69598.7ms, Fastest: 69248.4ms, Slowest: 69598.7ms, StdDev: 152.7ms
+
+Throughput, split into 66 x 1s:
+ * Fastest: 5.76 obj/s
+ * 50% Median: 5.76 obj/s
+ * Slowest: 5.76 obj/s
+
+
