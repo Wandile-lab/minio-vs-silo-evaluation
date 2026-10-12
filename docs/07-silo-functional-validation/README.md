@@ -1,4 +1,4 @@
-# DEV-910: Silo Functional Validation (Features, Cluster, Replication)
+# DEV-911: Silo Functional Validation (Features, Cluster, Replication)
 
 ## Executive Summary
 This evaluation tests Silo (`docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z`) against the MinIO baseline across three functional domains: Single-Node Features, Distributed Cluster Resilience, and Replication Modes. All tests reused identical topologies, resource limits, and network environments.
@@ -59,3 +59,23 @@ Environment: Source cluster (`silo-node1..4`) to Target instance (`silo-target:9
 | **Cluster Maintenance Probe** | Exit code 0 signals safe node eviction | PASS | Exited 0 under 4-node quorum, prevents split-brain |
 | **Client Checksum Verification** | Built-in `mcli checksum verify` validation | PASS | Audits bitrot/checksum directly via client |
 | **Restored Web Console** | Full-featured UI without enterprise license restrictions | PASS | Responding on port 9002 (HTTP 200 OK) |
+
+---
+
+## 5. Pool Expansion & Decommission Validation (Sub-task 4)
+
+Topology: Scaled from 1 pool (4 nodes: `silo-node1..4`) to 2 pools (8 nodes: `silo-node1..8`), EC:2 per pool.
+
+| Operation | MinIO Baseline | Silo Result | Delta Classification | Notes / Behavior |
+| :--- | :--- | :--- | :--- | :--- |
+| **Server Pool Expansion** | PASS (8 drives / 2 pools) | PASS (8 drives / 2 pools) | Same | Command-line multiple pool arguments parsed without downtime |
+| **Cross-Pool Read Continuity** | PASS | PASS | Same | Objects created prior to expansion readable without latency penalty |
+| **Pool Decommissioning** | PASS (`admin decommission start`) | PASS (`admin decommission start`) | Same | Background evacuation tracked via `admin decommission status` |
+
+---
+
+## 6. Cryptographic Manifest Verification & Integrity
+
+Objects audited post-failure and post-expansion using `scripts/manifest_toolkit.sh` and `scripts/compare-manifests.sh`:
+* **Evaluation Criteria**: Comparison of `KEY`, `VERSION_ID`, `SIZE`, `ETAG`, and `METADATA`.
+* **Result**: `100% Manifest Integrity Parity. Zero discrepancies detected.`

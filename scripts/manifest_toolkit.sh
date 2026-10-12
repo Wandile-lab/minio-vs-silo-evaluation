@@ -10,11 +10,9 @@ echo "[*] Querying objects from: ${TARGET_BUCKET}"
 # Write TSV header
 printf "KEY\tVERSION_ID\tSIZE\tETAG\tMETADATA\n" > "${OUTPUT_FILE}"
 
-# Query JSON from mcli and pipe into containerized Python for clean TSV formatting
 MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
-  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
   --entrypoint mcli docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
-  --insecure find "${TARGET_BUCKET}" --json \
+  find "http://glynacadmin:glynacinternpass2026@silo-node1:9000/${TARGET_BUCKET}" --json \
   | docker run --rm -i python:3.11-slim python -c '
 import sys, json
 
