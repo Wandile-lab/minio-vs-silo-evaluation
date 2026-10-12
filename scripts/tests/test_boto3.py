@@ -7,7 +7,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://minio-single:9000",
+    endpoint_url=__import__("os").getenv("S3_ENDPOINT_URL", "https://silo-single:9000"),
     aws_access_key_id="glynacadmin",
     aws_secret_access_key="glynacinternpass2026",
     verify=False,

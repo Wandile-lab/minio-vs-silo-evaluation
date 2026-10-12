@@ -7,7 +7,7 @@ echo "=================================================="
 
 # Ensure target bucket exists
 MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
-  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@silo-single:9000" \
   --entrypoint sh docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
   -c "
     mcli --insecure mb minio_single/vers-edge-test 2>/dev/null || true
@@ -17,7 +17,7 @@ MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
 # 1. Configure Lifecycle Rule (Expire noncurrent versions after 1 day, delete markers)
 echo "[+] Applying Bucket Lifecycle configuration..."
 MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
-  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@silo-single:9000" \
   --entrypoint sh docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
   -c "
     mcli --insecure ilm rule add --noncurrent-expire-days 1 --expire-delete-marker minio_single/vers-edge-test
@@ -28,16 +28,16 @@ MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
 echo "[+] Validating Prometheus metrics endpoint (/minio/v2/metrics/cluster)..."
 MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
   curlimages/curl:latest \
-  -k -s -f https://minio-single:9000/minio/v2/metrics/cluster > docs/03-minio-feature-validation/evidence/raw_metrics.txt
+  -k -s -f https://silo-single:9000/minio/v2/metrics/cluster > docs/07-silo-functional-validation/evidence/raw_metrics.txt
 
 echo "Sample metrics scraped:"
-head -n 10 docs/03-minio-feature-validation/evidence/raw_metrics.txt
+head -n 10 docs/07-silo-functional-validation/evidence/raw_metrics.txt
 echo "[PASS] Prometheus endpoint active and emitting cluster metrics."
 
 # 3. Test Observability: Admin Trace
 echo "[+] Validating Admin Trace capability..."
 MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
-  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@silo-single:9000" \
   --entrypoint sh docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
   -c "
     (mcli --insecure admin trace --all minio_single > /tmp/trace.log 2>&1 &)

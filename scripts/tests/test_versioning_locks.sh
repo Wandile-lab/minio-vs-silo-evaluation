@@ -8,7 +8,7 @@ echo "=================================================="
 # 1. Ensure locked bucket and records exist
 echo "[+] Ensuring locked bucket and records exist..."
 MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
-  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@silo-single:9000" \
   --entrypoint sh docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
   -c "
     mcli --insecure mb --with-lock minio_single/locked-dataset-bucket 2>/dev/null || true
@@ -25,7 +25,7 @@ MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
 # 2. Extract Version IDs for the locked records via ls --versions --json
 echo "[+] Extracting version IDs for locked objects..."
 COMP_VID=$(MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
-  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@silo-single:9000" \
   --entrypoint mcli docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
   --insecure ls --versions --json minio_single/locked-dataset-bucket/compliance-record.txt \
   | docker run --rm -i python:3.11-slim python -c "
@@ -39,7 +39,7 @@ for line in sys.stdin:
 ")
 
 GOV_VID=$(MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
-  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@silo-single:9000" \
   --entrypoint mcli docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
   --insecure ls --versions --json minio_single/locked-dataset-bucket/governance-record.txt \
   | docker run --rm -i python:3.11-slim python -c "
@@ -59,7 +59,7 @@ echo "  -> Extracted Governance Version ID:   ${GOV_VID}"
 echo "[+] Testing permanent version deletion on COMPLIANCE record (Expected: BLOCKED)..."
 set +e
 COMP_ERR=$(MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
-  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@silo-single:9000" \
   --entrypoint sh docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
   -c "mcli --insecure rm --version-id '${COMP_VID}' minio_single/locked-dataset-bucket/compliance-record.txt" 2>&1)
 set -e
@@ -76,7 +76,7 @@ fi
 echo "[+] Testing permanent version deletion on GOVERNANCE record with Legal Hold (Expected: BLOCKED)..."
 set +e
 GOV_ERR=$(MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
-  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@silo-single:9000" \
   --entrypoint sh docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
   -c "mcli --insecure rm --version-id '${GOV_VID}' minio_single/locked-dataset-bucket/governance-record.txt" 2>&1)
 set -e
@@ -92,7 +92,7 @@ fi
 # 5. Versioning Mechanics: Suspend, Re-enable, Delete Marker
 echo "[+] Testing Versioning State Changes & Delete Marker Mechanics..."
 MSYS_NO_PATHCONV=1 docker run --rm --net migration-net \
-  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@minio-single:9000" \
+  -e MC_HOST_minio_single="https://glynacadmin:glynacinternpass2026@silo-single:9000" \
   --entrypoint sh docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z \
   -c "
     mcli --insecure mb minio_single/vers-edge-test 2>/dev/null || true

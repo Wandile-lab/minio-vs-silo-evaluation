@@ -1,0 +1,26 @@
+services:
+  silo-target:
+    image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    container_name: silo-target
+    hostname: silo-target
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-glynacadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-glynacinternpass2026}
+    volumes:
+      - ../data/silo-target:/data
+    ports:
+      - "127.0.0.1:9005:9000"
+      - "127.0.0.1:9006:9001"
+    networks:
+      - migration-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+
+networks:
+  migration-net:
+    external: true

@@ -1,0 +1,31 @@
+services:
+  silo-single:
+    image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    container_name: silo-single
+    restart: unless-stopped
+    command: server /data --console-address ":9001" --certs-dir /root/.silo/certs
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-glynacadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-glynacinternpass2026}
+    volumes:
+      - ../data/silo-single:/data
+      - ../certs:/root/.silo/certs:ro
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    networks:
+      - migration-net
+    healthcheck:
+      test: ["CMD", "silo", "healthcheck", "--certs-dir", "/root/.silo/certs"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+
+networks:
+  migration-net:
+    external: true
